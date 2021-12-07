@@ -1,0 +1,429 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="robots" content="noindex">
+
+  <title>K&E</title>
+  <!-- web fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;display=swap" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900&amp;display=swap" rel="stylesheet">
+  <!-- //web fonts -->
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="../assets/css/style-liberty.css">
+
+  <style>
+    /* Styles for dialog window */
+    #small-dialog {
+      background: white;
+      padding: 5px;
+      max-width: 750px;
+      margin: 40px auto;
+      position: relative;
+    }
+
+    div#small-dialog iframe {
+      width: 100%;
+      height: 400px;
+      display: block;
+    }
+
+
+    /**
+ * Fade-zoom animation for first dialog
+ */
+
+    /* start state */
+    .my-mfp-zoom-in .zoom-anim-dialog {
+      opacity: 0;
+
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+
+
+
+      -webkit-transform: scale(0.8);
+      -moz-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+      -o-transform: scale(0.8);
+      transform: scale(0.8);
+    }
+
+    /* animate in */
+    .my-mfp-zoom-in.mfp-ready .zoom-anim-dialog {
+      opacity: 1;
+
+      -webkit-transform: scale(1);
+      -moz-transform: scale(1);
+      -ms-transform: scale(1);
+      -o-transform: scale(1);
+      transform: scale(1);
+    }
+
+    /* animate out */
+    .my-mfp-zoom-in.mfp-removing .zoom-anim-dialog {
+      -webkit-transform: scale(0.8);
+      -moz-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+      -o-transform: scale(0.8);
+      transform: scale(0.8);
+
+      opacity: 0;
+    }
+
+    /* Dark overlay, start state */
+    .my-mfp-zoom-in.mfp-bg {
+      opacity: 0;
+      -webkit-transition: opacity 0.3s ease-out;
+      -moz-transition: opacity 0.3s ease-out;
+      -o-transition: opacity 0.3s ease-out;
+      transition: opacity 0.3s ease-out;
+    }
+
+    /* animate in */
+    .my-mfp-zoom-in.mfp-ready.mfp-bg {
+      opacity: 0.8;
+    }
+
+    /* animate out */
+    .my-mfp-zoom-in.mfp-removing.mfp-bg {
+      opacity: 0;
+    }
+
+
+
+    /**
+ * Fade-move animation for second dialog
+ */
+
+    /* at start */
+    .my-mfp-slide-bottom .zoom-anim-dialog {
+      opacity: 0;
+      -webkit-transition: all 0.2s ease-out;
+      -moz-transition: all 0.2s ease-out;
+      -o-transition: all 0.2s ease-out;
+      transition: all 0.2s ease-out;
+
+      -webkit-transform: translateY(-20px) perspective(600px) rotateX(10deg);
+      -moz-transform: translateY(-20px) perspective(600px) rotateX(10deg);
+      -ms-transform: translateY(-20px) perspective(600px) rotateX(10deg);
+      -o-transform: translateY(-20px) perspective(600px) rotateX(10deg);
+      transform: translateY(-20px) perspective(600px) rotateX(10deg);
+
+    }
+
+    /* animate in */
+    .my-mfp-slide-bottom.mfp-ready .zoom-anim-dialog {
+      opacity: 1;
+      -webkit-transform: translateY(0) perspective(600px) rotateX(0);
+      -moz-transform: translateY(0) perspective(600px) rotateX(0);
+      -ms-transform: translateY(0) perspective(600px) rotateX(0);
+      -o-transform: translateY(0) perspective(600px) rotateX(0);
+      transform: translateY(0) perspective(600px) rotateX(0);
+    }
+
+    /* animate out */
+    .my-mfp-slide-bottom.mfp-removing .zoom-anim-dialog {
+      opacity: 0;
+
+      -webkit-transform: translateY(-10px) perspective(600px) rotateX(10deg);
+      -moz-transform: translateY(-10px) perspective(600px) rotateX(10deg);
+      -ms-transform: translateY(-10px) perspective(600px) rotateX(10deg);
+      -o-transform: translateY(-10px) perspective(600px) rotateX(10deg);
+      transform: translateY(-10px) perspective(600px) rotateX(10deg);
+    }
+
+    /* Dark overlay, start state */
+    .my-mfp-slide-bottom.mfp-bg {
+      opacity: 0;
+
+      -webkit-transition: opacity 0.3s ease-out;
+      -moz-transition: opacity 0.3s ease-out;
+      -o-transition: opacity 0.3s ease-out;
+      transition: opacity 0.3s ease-out;
+    }
+
+    /* animate in */
+    .my-mfp-slide-bottom.mfp-ready.mfp-bg {
+      opacity: 0.8;
+    }
+
+    /* animate out */
+    .my-mfp-slide-bottom.mfp-removing.mfp-bg {
+      opacity: 0;
+    }
+  </style>
+</head>
+
+<body>
+  
+<div class="w3l-bootstrap-header fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark  bg-dark p-2">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html"><span class="fa fa-shield"></span>K&E groupe</a>
+      <!-- if logo is image enable this   
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html" style="color: white; font-weight: bold;"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html#commencer"><i class="fa fa-info" aria-hidden="true"></i> A propos</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-briefcase" aria-hidden="true"></i> Services</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="surveillance_préventive.html"><span class="fa fa-video-camera" aria-hidden="true"></span> Surveillance préventive</a>
+              <a class="dropdown-item" href="sécurité_virtuelle.html"><span class="fa fa-lock" aria-hidden="true"></span> Sécurité virtuelle</a>
+              <a class="dropdown-item" href="reconnaissance_faciale.html"><span class="fa fa-eye" aria-hidden="true"></span> Reconnaissance faciale</a>
+              <a class="dropdown-item" href="idt_access.html"><span class="fa fa-wrench" aria-hidden="true"></span> IDT Acess</a>
+              <a class="dropdown-item" href="idt_jet.html"><span class="fa fa-wrench" aria-hidden="true"></span> IDT Jet</a>
+              <a class="dropdown-item" href="idt_onyx.html"><span class="fa fa-wrench" aria-hidden="true"></span> IDT Onyx</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html#membres"><i class="fa fa-users" aria-hidden="true"></i> Membres</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html"><i class="fa fa-user" aria-hidden="true"></i> Contact</a>
+          </li>
+          <li class="nav-item" style="position: right!important;">
+            <a class="nav-link" href="english/index.html" name="english"><span class="fa fa-globe"></span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+  <section class="w3l-about1">
+  <div class="section-info py-5">
+    <div class="new-block top-bottom">
+      <div class="container py-md-3">
+          <div class="col-md-6 col-sm cwp17-text">
+            <h3 class="my-3" style="color: white; padding-left: 60px;">IDT Access</h3>
+            <p style="color:  white;">Terminal de contrôle d'accès physique nouvelle génération</p>
+          </div>
+       <div class="col-md-6 col-sm cwp17-image">
+          <img src="../assets/images/access.png" class="img-fluid" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+<section class="w3l-job-overview2 py-5">
+  <div class="container">
+    <div class="job-info mb-5">
+      <h5 class="card-title">IDT Access</h5>
+      <p>Le terminal de contrôle d'accès physique pour ceux qui recherchent un processus d'identification/vérification <strong>rapide et précis</strong>. L'IDT Access incorpore la technologie d'empriente digitale multispectrale de précision dans un périphérique ergonomique intégré qui offre des performances, une fiabilité et une commodité inégalées.</p>
+      <p>Disponible de manière modulaire, l'IDT Access fournit une solution pour les déploiements de contrôle et d'accès de petite à moyenne taille.</p>
+      <p>Que vous recherchiez un processus de vérification, ce terminal PAC unique et carte à puce intégrée ou le lecteur de proximité, est la solution parfaite. L'IDT Access fonctionne en tant que PAC autonome ou dans le cadre d'une solution de contrôle d'accès en réseau, permettant une modularité et une intéropérabilité complètes entre tous les logiciels et matériels IdentyTech et tiers à l'aide de notre IDT-SDK. L'IDT Access est proposé dans une conception robuste et élégante, avec les interfaces requis par l'industrie, une sécurité et une commodité améliorées.</p>
+    </div>
+  </div>
+</section>
+  <!-- footer-28 block -->
+    <section class="w3l-market-footer">
+   <footer class="footer-28">
+     <div class="footer-bg-layer">
+        <div class="container py-lg-3">
+          <div class="row footer-top-28">
+            <div class="col-md-6 footer-list-28 mt-5">
+                <h6 class="footer-title-28">Contact information</h6>
+                <ul>
+                  <li>
+                    <p><strong>Siège social</strong> : Riviera Faya Lauriers 9 entrée C ,Abidjan, Côte d'Ivoire</p>
+                  </li>
+                  <li>
+                    <p><strong>Phone</strong> : <a href="tel:+225 57-10-63-94">+225 57-10-63-94</a></p>
+                  </li>
+                  <li>
+                    <p><strong>Email</strong> : <a href="mailto:postmaster@kegroupe.com">postmaster@kegroupe.com</a></p>
+                  </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 footer-list-28 mt-5">
+                  <h6 class="footer-title-28">Nos services</h6>
+                  <ul>
+                    <li><a href="surveillance_préventive.html">Surveillance préventive</a></li>
+                    <li><a href="séurité_virtuelle.html">Sécurité virtuelle</a></li>
+                    <li><a href="reconnaissance_faciale.html">Reconnaissance faciale</a></li>
+                    <li><a href="idt_access.html">IDT Access</a></li>
+                    <li><a href="idt_jet.html">IDT Jet</a></li>
+                    <li><a href="idt_onyx.html">IDT Onyx</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-4 footer-list-28 mt-5">
+                  <h6 class="footer-title-28">La Compagnie</h6>
+                  <ul>
+                   <li><a href="../index.html#commencer">A propos</a></li>
+                    <li><a href="../index.html#commencer">Comment ça marche</a></li>
+                    <li><a href="../index.html#avantages">Avantages</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-4 footer-list-28 mt-5">
+                  <h6 class="footer-title-28">Divers</h6>
+                  <ul>
+                    <li><a href="contact.html">Contactez-nous</a></li>
+                    <li><a href="../index.html#membres">Membres</a></li>
+                    <li><a href="english/index.html">English</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="midd-footer-28 align-center py-lg-4 py-3 mt-5">
+          <div class="container">
+            <p class="copy-footer-28 text-center" style="font-style: bold;"> &copy; 2020 . All Rights Reserved <a href="mailto:postmaster@kegroupe.com">K&E Groupe</a>. Design by <a href="mailto:ehuidav@gmail.com"><strong>David Ehui</strong></a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+        <!-- move top -->
+        <button onclick="topFunction()" id="movetop" title="Go to top">
+          &#10548;
+        </button>
+        <script>
+          // When the user scrolls down 20px from the top of the document, show the button
+          window.onscroll = function () {
+            scrollFunction()
+          };
+
+          function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+              document.getElementById("movetop").style.display = "block";
+            } else {
+              document.getElementById("movetop").style.display = "none";
+            }
+          }
+
+          // When the user clicks on the button, scroll to the top of the document
+          function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+          }
+        </script>
+        <!-- /move top -->
+  </section>
+  <!-- //footer-28 block -->
+
+  <!-- jQuery, Bootstrap JS -->
+  <script src="../assets/js/jquery-3.3.1.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+
+  <!-- Template JavaScript -->
+
+  <script src="../assets/js/owl.carousel.js"></script>
+
+  <!-- script for owlcarousel -->
+  <script>
+    $(document).ready(function () {
+      $('.owl-one').owlCarousel({
+        loop: true,
+        margin: 0,
+        nav: true,
+        responsiveClass: true,
+        autoplay: false,
+        autoplayTimeout: 5000,
+        autoplaySpeed: 1000,
+        autoplayHoverPause: false,
+        responsive: {
+          0: {
+            items: 1,
+            nav: false
+          },
+          480: {
+            items: 1,
+            nav: false
+          },
+          667: {
+            items: 1,
+            nav: true
+          },
+          1000: {
+            items: 1,
+            nav: true
+          }
+        }
+      })
+    })
+  </script>
+  <!-- //script for owlcarousel -->
+
+  <!-- disable body scroll which navbar is in active -->
+  <script>
+    $(function () {
+      $('.navbar-toggler').click(function () {
+        $('body').toggleClass('noscroll');
+      })
+    });
+  </script>
+  <!-- disable body scroll which navbar is in active -->
+
+  <script src="../assets/js/smartphoto.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const sm = new SmartPhoto(".js-img-viwer", {
+        showAnimation: false
+      });
+      // sm.destroy();
+    });
+  </script>
+
+  <script src="../assets/js/jquery.magnific-popup.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.popup-with-zoom-anim').magnificPopup({
+        type: 'inline',
+
+        fixedContentPos: false,
+        fixedBgPos: true,
+
+        overflowY: 'auto',
+
+        closeBtnInside: true,
+        preloader: false,
+
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-zoom-in'
+      });
+
+      $('.popup-with-move-anim').magnificPopup({
+        type: 'inline',
+
+        fixedContentPos: false,
+        fixedBgPos: true,
+
+        overflowY: 'auto',
+
+        closeBtnInside: true,
+        preloader: false,
+
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-slide-bottom'
+      });
+    });
+  </script>
+ 
+</body>
+
+</html>
